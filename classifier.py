@@ -29,7 +29,7 @@ class Classifier(nn.Module):
         self.outbn = nn.BatchNorm1d(n_classes)
     
     def forward(self, x):
-        x = self.inexnet(x)
+        x = self.inexnet(x)[-1]
         x = self.flatten(x)
         for module in self.linear:
             x = module(x)
