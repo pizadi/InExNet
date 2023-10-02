@@ -3,7 +3,11 @@ from torch import nn
 from torch.nn import functional as F
 
 class ResConv(nn.Module):
-    def __init__(self, features, width):
+    def __init__(
+        self,
+        features,
+        width
+        ):
         """
         A single convolutional layer, with decoupled depthwise convolutions and a residual connection.
         Parameters:
@@ -24,7 +28,12 @@ class ResConv(nn.Module):
         return x + self.net(x)
 
 class ConvBlock(nn.Module):
-    def __init__(self, depth, features, width):
+    def __init__(
+        self,
+        depth,
+        features,
+        width
+        ):
         """
         A chain of convolutional layers.
         Parameters:
@@ -40,7 +49,10 @@ class ConvBlock(nn.Module):
         return x
 
 class IEBlock(nn.Module):
-    def __init__(self, features):
+    def __init__(
+        self,
+        features
+        ):
         """
         An inhibition-excitation block. Bilaterally inhibits and excites the features
         in two feature groups.
@@ -61,7 +73,11 @@ class IEBlock(nn.Module):
         return x, y
 
 class ProcBlock(nn.Module):
-    def __init__(self, in_features, features):
+    def __init__(
+        self,
+        in_features,
+        features
+        ):
         """
         An feature-processing block which processes the features in two parallel
         wide and deep paths.
@@ -92,7 +108,11 @@ class InExNet(nn.Module):
     - dims = The number of features in each block
     - input_dim = The number of channels in the input
     """
-    def __init__(self, dims=[32, 64, 128, 256, 512, 512], input_dim=3):
+    def __init__(
+        self,
+        dims=[32, 64, 128, 256, 512, 512],
+        input_dim=3
+        ):
         super().__init__()
         self.initconv = nn.Conv2d(input_dim, dims[0], 3, padding='same')
         self.bn0 = nn.BatchNorm2d(dims[0])
